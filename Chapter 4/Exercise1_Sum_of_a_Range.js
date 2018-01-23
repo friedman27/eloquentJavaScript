@@ -7,24 +7,38 @@ Next, write a sum function that takes an array of numbers and returns
 the sum of these numbers. Run the previous program and see whether it
 does indeed return 55.
 
+As a bonus assignment, modify your range function to take an optional
+third argument that indicates the “step” value used to build up the array.
+If no step is given, the array elements go up by increments of one,
+corresponding to the old behavior. The function call range(1, 10, 2) should
+return [1, 3, 5, 7, 9]. Make sure it also works with negative step values
+so that range(5, 2, -1) produces [5, 4, 3, 2].
 */
 
+
 // takes two arguments and returns an array of all the numbers from start up to (and including) end
-function range(start, end) {
+function range(start, end, step) {
   var array = [];
-  var difference = end - start;
+
+
   //if the start value is less than the start value, array returns ascending
-  if(difference > 0) {
-    for (var i = 0; i <= difference; i++) {
+  if(start < end) {
+    if ((step == null || 0) || step < 0) {
+      step = 1;
+    }
+    while (start <= end) {
       array.push(start);
-      start++;
+      start += step;
     }
   }
   // if end value is less than the start value, array returns descending
-  else if (difference < 0) {
-    for (var k = 0; k <= (difference * -1); k++) {
+  else if (start > end) {
+    if ((step == null || 0) || step > 0) {
+      step = -1;
+    }
+    while (start >= end) {
       array.push(start);
-      start--;
+      start += step;
     }
   }
   // if start and end are the same number, return undefined
@@ -49,3 +63,5 @@ console.log(range(5, 2, -1));
 // → [5, 4, 3, 2]
 console.log(sum(range(1, 10)));
 // → 55
+console.log(range(1, 10, 2))
+// → [1, 3, 5, 7, 9]
